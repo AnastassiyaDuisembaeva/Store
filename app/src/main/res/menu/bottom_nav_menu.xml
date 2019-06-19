@@ -15,7 +15,6 @@
     <item
         android:id="@+id/navigation_accaunt"
         android:icon="@drawable/ic_accaunt"
-        android:title="@string/title_accaunt"
-        android:visible="false"/>
+        android:title="@string/title_accaunt"/>
 
 </menu>

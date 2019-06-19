@@ -9,11 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener  {
-    private FirebaseAuth  mAuth;
     private Toolbar toolbar;
 
     @Override
@@ -36,21 +33,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
 
         return loadFragment(fragment);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        MenuItem accaunt = (MenuItem) findViewById(R.id.navigation_accaunt);
-        if (user != null) {
-            accaunt.setVisible(true);
-
-        } else {
-            accaunt.setVisible(false);
-
-        }
     }
 
     @Override
