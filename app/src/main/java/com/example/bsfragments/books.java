@@ -75,10 +75,7 @@ public class books extends Fragment  {
         });
     }
 
-    public void writeNewBook(String bookId,String name, String author, String bookGanre, String price, String imageBook){
-        Item book = new Item(name, author, bookGanre, price, imageBook);
-        myRef.child("books").child(bookId).setValue(book);
-    }
+
 
 /*
     private void setInitialData(){
