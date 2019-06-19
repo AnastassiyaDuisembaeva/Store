@@ -12,4 +12,9 @@
         android:icon="@drawable/ic_login"
         android:title="@string/action_sign_in_short"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_addNewBook"
+        android:icon="@drawable/ic_addNewBook"
+        android:title="@string/action_sign_in_short"
+        app:showAsAction="always" />
 </menu>

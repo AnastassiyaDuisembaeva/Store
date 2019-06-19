@@ -5,9 +5,11 @@ public class Item {
     private String author;
     private String bookGanre;
     private String price;
-    private int imageBook;
 
-    public Item(String name, String author, String bookGanre, String price, int imageBook){
+    private String imageBook;
+  //  private int imageBook;
+
+    public Item(String name, String author, String bookGanre, String price, String imageBook){
 
         this.name = name;
         this.author = author;
@@ -46,11 +48,11 @@ public class Item {
         this.price = price;
     }
 
-    public int getImageBook() {
+    public String getImageBook() {
         return this.imageBook;
     }
 
-    public void setImageBook(int imageBook) {
+    public void setImageBook(String imageBook) {
         this.imageBook = imageBook;
     }
 }

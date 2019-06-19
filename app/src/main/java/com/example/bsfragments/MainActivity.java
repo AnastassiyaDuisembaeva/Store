@@ -67,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+        if(item.getItemId() == R.id.action_addNewBook) {
+            Intent intent = new Intent(this, AddNewBookActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 
