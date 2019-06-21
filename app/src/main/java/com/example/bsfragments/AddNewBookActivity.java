@@ -4,9 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
 
 public class AddNewBookActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,11 +27,11 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_book);
 
-        name = (EditText)findViewById(R.id.name);
-        author = (EditText)findViewById(R.id.author);
-        bookGanre = (EditText)findViewById(R.id.bookGanre);
-        price = (EditText)findViewById(R.id.price);
-        imageBook = (EditText)findViewById(R.id.imageBook);
+        name = (EditText)findViewById(R.id.nameAdd);
+        author = (EditText)findViewById(R.id.authorAdd);
+        bookGanre = (EditText)findViewById(R.id.bookGanreAdd);
+        price = (EditText)findViewById(R.id.priceAdd);
+        imageBook = (EditText)findViewById(R.id.imageBookAdd);
 
         findViewById(R.id.add_new_book).setOnClickListener((View.OnClickListener) this);
     }
@@ -41,8 +44,16 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
     }
     public void writeNewBook(String name, String author, String bookGanre, String price, String imageBook){
         Item book = new Item(name, author, bookGanre, price, imageBook);
-        int rand = (int)Math.random()*1000000;
-        String bookId = Integer.toString(rand);
-        myRef.child("books").child(bookId).setValue(book);
+        if(book != null){
+            Random rand = new Random();
+            int randomNum = rand.nextInt(1000000);
+            String bookId = Integer.toString(randomNum);
+            myRef.child("books").child(bookId).setValue(book);
+            Toast.makeText(AddNewBookActivity.this, "Книга добавлена успешна", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(AddNewBookActivity.this, "Поля не заполненны, книга не может быть добавлена", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
