@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AddNewBookActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+    DatabaseReference myRef = database.getReference();
 
     private EditText name;
     private EditText author;
@@ -36,11 +36,13 @@ public class AddNewBookActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         if(view.getId() == R.id.add_new_book)
         {
-            writeNewBook(name.getText().toString(), name.getText().toString(), author.getText().toString(), bookGanre.getText().toString(), price.getText().toString(), imageBook.getText().toString());
+            writeNewBook(name.getText().toString(), author.getText().toString(), bookGanre.getText().toString(), price.getText().toString(), imageBook.getText().toString());
         }
     }
-    public void writeNewBook(String bookId,String name, String author, String bookGanre, String price, String imageBook){
+    public void writeNewBook(String name, String author, String bookGanre, String price, String imageBook){
         Item book = new Item(name, author, bookGanre, price, imageBook);
+        int rand = (int)Math.random()*1000000;
+        String bookId = Integer.toString(rand);
         myRef.child("books").child(bookId).setValue(book);
     }
 }

@@ -1,13 +1,16 @@
 package com.example.bsfragments;
 
 public class Item {
+
+    public Item(){}
+
     private String name;
     private String author;
     private String bookGanre;
     private String price;
 
     private String imageBook;
-  //  private int imageBook;
+    //  private int imageBook;
 
     public Item(String name, String author, String bookGanre, String price, String imageBook){
 

@@ -14,7 +14,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/action_addNewBook"
-        android:icon="@drawable/ic_addNewBook"
+        android:icon="@drawable/ic_add_new_book"
         android:title="@string/action_sign_in_short"
         app:showAsAction="always" />
 </menu>

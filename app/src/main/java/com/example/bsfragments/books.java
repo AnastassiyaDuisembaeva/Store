@@ -1,6 +1,7 @@
 package com.example.bsfragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.bsfragments.interfaces.IBookClickedInterface;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,10 +23,10 @@ import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public class books extends Fragment  {
+public class books extends Fragment  implements IBookClickedInterface {
     List<Item> items = new ArrayList<>();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+    DatabaseReference myRef = database.getReference();
 
 
     @Override
@@ -44,7 +46,7 @@ public class books extends Fragment  {
     public void onResume() {
         super.onResume();
         RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.booksList);
-        DataAdapter adapter = new DataAdapter(getActivity(), items);
+        DataAdapter adapter = new DataAdapter(getActivity(), items, this);
         //добавление notifyDataSetChanged();
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
@@ -59,7 +61,9 @@ public class books extends Fragment  {
                 Iterable<DataSnapshot> itemsBook = dataSnapshot.getChildren();
                 ArrayList<Item> books = new ArrayList<Item>();
                 for(DataSnapshot book : itemsBook ){
-                    Item parsedBook = (Item)book.getValue();
+                    Item parsedBook = book.getValue(Item.class);
+                    //Item parsedBook = new Item();
+                     // parsedBook.setName((String)book.child("name").getValue());
                     if (parsedBook != null) {
                         books.add(parsedBook);
                     }
@@ -74,7 +78,13 @@ public class books extends Fragment  {
             }
         });
     }
-
+    @Override
+    public void onViewClicked(View view, int position) {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        Bundle data = new Bundle();
+        data.putString("item_book_image", items.get(position).getImageBook());
+        getActivity().startActivity(intent);
+    }
 
 
 /*

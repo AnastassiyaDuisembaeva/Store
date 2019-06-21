@@ -8,15 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.bsfragments.interfaces.IBookClickedInterface;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     private LayoutInflater inflater;
     private List<Item> items;
+    private IBookClickedInterface iBookClickedInterface;
 
-    DataAdapter(Context context, List<Item> items) {
+    DataAdapter(Context context, List<Item> items, IBookClickedInterface iBookClickedInterface) {
         this.items = items;
         this.inflater = LayoutInflater.from(context);
+        this.iBookClickedInterface = iBookClickedInterface;
     }
     @Override
     public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,7 +36,7 @@ public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         holder.authorView.setText(item.getAuthor());
         holder.bookGanreView.setText(item.getbookGanre());
         holder.priceView.setText(item.getPrice());
-        holder.imageBookView.setImageResource(item.getImageBook());
+        Picasso.get().load(item.getImageBook()).into(holder.imageBookView);
     }
 
     @Override
@@ -39,7 +44,7 @@ public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         final ImageView imageBookView;
         final TextView nameView, authorView, bookGanreView, priceView;
         ViewHolder(View view){
@@ -49,6 +54,13 @@ public class DataAdapter  extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             authorView = (TextView) view.findViewById(R.id.author);
             bookGanreView = (TextView) view.findViewById(R.id.bookGanre);
             priceView = (TextView) view.findViewById(R.id.price);
+
+            imageBookView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            iBookClickedInterface.onViewClicked(v, getAdapterPosition());
         }
     }
 }
