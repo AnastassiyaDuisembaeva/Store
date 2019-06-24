@@ -4,18 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_authentication"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddNewBookActivity">
+    android:layout_height="match_parent">
 
 
     <EditText
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:id="@+id/nameAdd"
+        android:id="@+id/idAdd"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="145dp"
-        android:hint="Название"
+        android:hint="ID"
         android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/nameAdd"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/idAdd"
+        android:hint="Название"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/authorAdd"
@@ -50,7 +57,7 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/priceAdd"
-        android:hint="Адрес изображения"
+        android:hint="ССылка изображения"
         android:textSize="20sp"
         />
     <Button

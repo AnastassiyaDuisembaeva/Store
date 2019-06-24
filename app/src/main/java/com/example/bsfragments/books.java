@@ -63,11 +63,12 @@ public class books extends Fragment  implements IBookClickedInterface {
 
                 for(DataSnapshot book : itemsBook ){
                     Item parsedBook = new Item();
-                    parsedBook.setName((String) book.child("books").child("name").getValue());
-                    parsedBook.setAuthor((String) book.child("books").child("author").getValue());
-                    parsedBook.setbookGanre((String) book.child("books").child("bookGanre").getValue());
-                    parsedBook.setPrice((String) book.child("books").child("price").getValue());
-                    parsedBook.setImageBook((String) book.child("books").child("imageBook").getValue());
+                    String bookId =  myRef.child("books").getKey();
+                    parsedBook.setName((String) book.child(bookId).child("name").getValue());
+                    parsedBook.setAuthor((String) book.child(bookId).child("author").getValue());
+                    parsedBook.setbookGanre((String) book.child(bookId).child("bookGanre").getValue());
+                    parsedBook.setPrice((String) book.child(bookId).child("price").getValue());
+                    parsedBook.setImageBook((String) book.child(bookId).child("imageBook").getValue());
                    if (parsedBook != null) {
                         books.add(parsedBook);
                     }
